@@ -1,13 +1,45 @@
-#include "stdafx.h"
-#include "opencv_base_GUI.h"
+#include <windows.h>
+// C ランタイム ヘッダー ファイル
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+#include <tchar.h>
+
+#include <Shellapi.h>
+#include <opencv2/opencv.hpp>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <chrono>
+
+
+
+//出力ウィンドウの初期位置とサイズ
+#define POS_X -1280
+#define POS_Y 170
+#define WIDTH  1280
+#define HEIGHT 768
+//
+#define BORDER_CENTER 456
+/*
+WINAPIでは、効果音の複数同時再生ができないようなので、
+効果音はHSPで作成した外部のプログラムに再生させることにする。
+効果音を再生したい時に以下のウィンドウメッセージをSendMessageで送る。
+*/
+#define YARI_MYMESSAGE   (WM_APP + 1)
+#define YARARE_MYMESSAGE (WM_APP + 2)
 
 using namespace std;
 using namespace cv;
 
+//効果音再生アプリのキャプション名
 #define SE_PLAYER_CAPTION "HSHS"
-#define SE_PLAYER_EXE "C:\\Users\\kento\\Documents\\Visual Studio 2015\\Projects\\opencv_base_GUI\\x64\\Release\\hsptmp.exe"
-#define DEATH_TEMPLATE_IMAGE "E:\\scan5\\splat_temp.bmp"
-#define MAP_TEMPLATE_IMAGE   "E:\\scan5\\map_batu.bmp"
+//効果音再生アプリの実行ファイルパス
+#define SE_PLAYER_EXE "hsptmp.exe"
+//デスを表すマッチング用の画像ファイルパス
+#define DEATH_TEMPLATE_IMAGE "splat_temp.bmp"
+//マップのXマーク表すマッチング用の画像ファイルパス
+#define MAP_TEMPLATE_IMAGE   "map_batu.bmp"
 
 //デバッグ文字列表示用マクロ
 #define dprintf( str, ... ) \
