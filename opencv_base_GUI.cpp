@@ -15,11 +15,11 @@
 
 
 //出力ウィンドウの初期位置とサイズ
-#define POS_X -1280
-#define POS_Y 170
+#define POS_X 0
+#define POS_Y 0
 #define WIDTH  1280
 #define HEIGHT 768
-//
+//固定値
 #define BORDER_CENTER 456
 /*
 WINAPIでは、効果音の複数同時再生ができないようなので、
